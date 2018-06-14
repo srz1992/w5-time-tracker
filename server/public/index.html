@@ -6,14 +6,18 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="vendors/angular-material.min.css">
+    <link rel="stylesheet" href="vendors/ng-table.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+    <!-- Moment JS -->
+    
     <!-- Angular -->
     <script src="vendors/angular.min.js"></script>
     <script src="vendors/angular-route.min.js"></script>
-    <script src="vendors/angular-messages.min.js"></script>
     <script src="vendors/angular-animate.min.js"></script>
     <script src="vendors/angular-aria.min.js"></script>
+    <script src="vendors/angular-messages.min.js"></script>
     <script src="vendors/angular-material.min.js"></script>
+    <script src="vendors/ng-table.min.js"></script>
    
     <!-- Client -->
     <script src="scripts/client.js"></script>
@@ -26,12 +30,15 @@
 
 
 </head>
-<body ng-app="timeApp">
-    <h1>Time Tracker</h1>
-    <nav>
-        <a href="#!/">Time Entry</a>
-        <a href="#!/manage-projects">Manage Projects</a>
-        <a href="#!/reports">Reports</a>
+<body ng-app="timeApp" layout="column">
+    <md-toolbar class="md-primary md-primary md-hue-2">
+        <h1>Time Tracker</h1>
+    </md-toolbar>
+    <nav layout="row" layout-xs="column">
+        <a href="#!/"><md-button flex="33" class="md-raised">Time Entry</md-button></a> 
+        <a href="#!/manage-projects"><md-button flex="33" class="md-raised">Manage Projects</md-button></a>
+        <a href="#!/reports"><md-button flex="33" class="md-raised">Reports</md-button> </a>
+        </div>
     </nav>
     <ng-view>
 

@@ -1,0 +1,22 @@
+body{
+    color: rgb(64,64,64);
+}
+
+.md-primary{
+    background-color: rgb(151, 151, 151) !important;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(19.2, 19.2, 19.2)
+}
+
+.ng-table{
+    border: 1px solid #000;
+}
+tr{
+    border: 1px solid #000;
+}
+td{
+    text-align: center;
+}

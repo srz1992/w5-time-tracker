@@ -1,4 +1,4 @@
-let timeApp = angular.module('timeApp', ['ngRoute']);
+let timeApp = angular.module('timeApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngTable']);
 
 timeApp.config(function($routeProvider){
     $routeProvider.when('/',{
