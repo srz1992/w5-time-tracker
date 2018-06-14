@@ -7,15 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="vendors/angular-material.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+    <!-- Angular -->
     <script src="vendors/angular.min.js"></script>
     <script src="vendors/angular-route.min.js"></script>
     <script src="vendors/angular-messages.min.js"></script>
     <script src="vendors/angular-animate.min.js"></script>
     <script src="vendors/angular-aria.min.js"></script>
     <script src="vendors/angular-material.min.js"></script>
+   
+    <!-- Client -->
     <script src="scripts/client.js"></script>
+    
+    <!-- Service and controllers -->
+    <script src="scripts/service.js"></script>
+    <script src="scripts/controllers/time-entry.controller.js"></script>
+    <script src="scripts/controllers/manage-project.controller.js"></script>
+    <script src="scripts/controllers/reports.controller.js"></script>
+
+
 </head>
-<body>
+<body ng-app="timeApp">
     <h1>Time Tracker</h1>
+    <nav>
+        <a href="#!/">Time Entry</a>
+        <a href="#!/manage-projects">Manage Projects</a>
+        <a href="#!/reports">Reports</a>
+    </nav>
+    <ng-view>
+
+    </ng-view>
 </body>
 </html>
