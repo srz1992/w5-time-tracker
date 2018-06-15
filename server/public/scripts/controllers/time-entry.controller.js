@@ -1,6 +1,6 @@
 timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', function(TimeService, NgTableParams){
     let vm = this;
-    console.log('in TimeEntryController');
+    vm.taskList;
 
     vm.project = [
     {
@@ -21,27 +21,62 @@ timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', functi
 
     vm.tableParams = new NgTableParams({count: data.length}, { dataset: data, counts: []});
 
-    
-    vm.addEntry = function(){
-        console.log('in vm.addEntry');
+    vm.getEntry = function(){
+        TimeService.getEntry().then(function(){
+            vm.taskList = TimeService.taskList;
+            console.log('vm.taskList is:', vm.taskList);
+        })
         
+    }
+    
+    vm.addEntry = function(){        
         vm.calculateHours = function(){
-           console.log('vm.startIn:', vm.startIn, '| vm.endIn:', vm.endIn);
+           let timeOne= moment(vm.startIn);
+           let timeTwo= moment(vm.endIn);
+           vm.difference = Math.abs(timeOne.diff(timeTwo, 'hours, minutes'));
+           vm.difference2 = moment(vm.difference, "SSS").format("h:mm")
+           console.log('vm.difference2 is:', vm.difference2);
            
-            vm.startIn
-            vm.endIn
         }
+
+        moment(vm.difference, "SSS").format("h:mm")
+
+        vm.parseDate = function(){
+            console.log('in parseDate');
+            vm.dateToSend = moment(vm.dateIn).format("dddd, MMM Do YYYY");
+            console.log('dateToSend is:', vm.dateToSend);
+
+        }
+
+        // Calling addEntry functions
         vm.calculateHours();
+        vm.parseDate();
+        
 
         vm.newEntry = {
             task: vm.taskIn,
             project: vm.projectIn,
             date: vm.dateIn,
-            hours: 0
+            startTime: vm.startIn,
+            endTime: vm.endIn
         };
 
+        vm.postEntry = function(){
+            TimeService.newEntry = vm.newEntry;
+            TimeService.postEntry().then(function(){vm.getEntry()});
+            
+        }
+        vm.postEntry();
+
+        console.log('vm.newEntry is:', vm.newEntry);
+        }
+
+    vm.deleteEntry = function(id){
+        console.log('in vm.deleteEntry. id is:', id);
+        TimeService.deleteEntry(id).then(function(){vm.getEntry();});
+        
     }
 
-
+    vm.getEntry();
 
 }])

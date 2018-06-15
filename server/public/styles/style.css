@@ -20,3 +20,11 @@ tr{
 td{
     text-align: center;
 }
+
+md-datepicker{
+    vertical-align: -23px !important;
+}
+
+md-select{
+    vertical-align: 40px !important;
+}

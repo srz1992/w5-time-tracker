@@ -1,0 +1,50 @@
+const express = require('express');
+const router = express.Router();
+const pool = require('../modules/pool')
+
+router.post('/', (req, res)=>{
+    console.log('in post to create new entry with:', req.body);
+    let task = req.body.task;
+    let project = req.body.project;
+    let date = req.body.date;
+    let start_time = req.body.startTime;
+    let end_time = req.body.endTime;    
+    const queryText = `INSERT INTO tasks (task, project, date, start_time, end_time) VALUES ($1, $2, $3, $4, $5)`
+    pool.query(queryText, [task, project, date, start_time, end_time])
+    .then((result)=>{
+        console.log('back from db with:', result);
+        res.sendStatus(201)
+    }).catch((error)=>{
+        console.log('error inserting into database:', error);
+        res.sendStatus(500);
+    })
+})
+
+router.get('/', (req, res)=>{
+    console.log('getting task database rows from tasks');
+    const queryText = `Select * FROM tasks`;
+    pool.query(queryText)
+    .then((result) =>{
+        res.send(result.rows);
+    }).catch((error)=>{
+        console.log('error getting tasks:', error);
+        res.sendStatus(500);
+    })
+})
+
+router.delete('/:id', (req, res)=>{
+    console.log('in task entry delete request');
+    let id = req.params.id;
+    let queryText = `DELETE from tasks WHERE id=$1`;
+    pool.query(queryText, [id])
+    .then(function(response){
+        console.log('deleted from database:', response); 
+        res.sendStatus(200); 
+    }).catch(function(error){
+        console.log('error deleting from database:', error);
+    res.sendStatus(500);        
+    })
+    
+})
+
+module.exports = router;
