@@ -14,28 +14,44 @@ timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', functi
     }
     ]
 
-    let data = [
-        {task: "Add styling", project: 'Koala Holla', date: '17/10/11', hours: 2},
-        {task: "Create controllers", project: 'Pet Hotel', date: '18/10/11', hours: 1},
-        ];    
+    let data = [];    
+
+    let data1 = [];
 
     vm.tableParams = new NgTableParams({count: data.length}, { dataset: data, counts: []});
 
     vm.getEntry = function(){
+        let taskList;
         TimeService.getEntry().then(function(){
             vm.taskList = TimeService.taskList;
+            vm.tableParams.data = vm.taskList;
+            data = vm.taskList;
             console.log('vm.taskList is:', vm.taskList);
+            vm.tableParams = new NgTableParams({count: vm.taskList.length}, { dataset: vm.taskList, counts: []});
+            console.log('vm.tableParams is:', vm.tableParams);
+            
         })
         
     }
     
     vm.addEntry = function(){        
-        vm.calculateHours = function(){
+        vm.calculateMinutestoHours = function(){
            let timeOne= moment(vm.startIn);
            let timeTwo= moment(vm.endIn);
-           vm.difference = Math.abs(timeOne.diff(timeTwo, 'hours, minutes'));
-           vm.difference2 = moment(vm.difference, "SSS").format("h:mm")
-           console.log('vm.difference2 is:', vm.difference2);
+           console.log('timeOne is:', timeOne);
+           
+           if (vm.startIn < vm.endIn){
+            vm.difference = Math.abs(timeOne.diff(timeTwo, 'minutes'));
+            vm.hoursToSend = Math.abs(vm.difference/60).toFixed(2);
+            console.log('vm.difference is:', vm.difference);
+            console.log('vm.hoursToSend is:', vm.hoursToSend);
+           }
+           else {
+            vm.difference = timeOne.diff(timeTwo, 'minutes');
+            vm.hoursToSend = Math.abs(vm.difference/60-24).toFixed(2);
+            console.log('vm.difference is:', vm.difference);
+            console.log('vm.hoursToSend is:', vm.hoursToSend);
+           }
            
         }
 
@@ -49,7 +65,7 @@ timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', functi
         }
 
         // Calling addEntry functions
-        vm.calculateHours();
+        vm.calculateMinutestoHours();
         vm.parseDate();
         
 
@@ -58,13 +74,13 @@ timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', functi
             project: vm.projectIn,
             date: vm.dateIn,
             startTime: vm.startIn,
-            endTime: vm.endIn
+            endTime: vm.endIn,
+            hours: vm.hoursToSend
         };
 
         vm.postEntry = function(){
             TimeService.newEntry = vm.newEntry;
             TimeService.postEntry().then(function(){vm.getEntry()});
-            
         }
         vm.postEntry();
 

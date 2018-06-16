@@ -43,7 +43,6 @@ timeApp.service('TimeService', function($http){
             console.log('error deleting entry:', error);
             
         })
-        
     }
 
 })

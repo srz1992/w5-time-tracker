@@ -1,1 +1,38 @@
 <h1>Manage Projects</h1>
+<div layout="row" div class="md-inline-form">
+        <form>
+        <input flex type="text" placeholder="Task name" ng-model="TEC.taskIn">
+        <br>
+            <md-input-container class="project">
+            <label>Project</label>
+            <md-select ng-model="TEC.projectIn">
+                <md-option ng-repeat="project in TEC.project" ng-value="project.name">
+                {{project.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+                <label>Enter date</label>
+                <md-datepicker md-hide-icons="calendar" ng-model="TEC.dateIn"></md-datepicker>
+        </md-input-container>
+        <input type="time" placeholder="Start time" ng-model="TEC.startIn" step="60" value="12:00">
+        <input type="time" id="time" placeholder="End time" ng-model="TEC.endIn">
+        
+        <md-button class="md-raised" ng-click="TEC.addEntry()">Submit</md-button>
+        </form>
+        </div>
+        
+        <table ng-table="TEC.tableParams" class="table" show-filter="true">
+                <tr ng-repeat="task in $data">
+                    <td title="'Task'" filter="{ task: 'text'}" sortable="'task'">
+                        {{task.task}}</td>
+                    <td title="'Project'" filter="{ project: 'text'}" sortable="'project'">
+                        {{task.project}}</td>
+                    <td title="'Date'" sortable="'date'">
+                        {{task.date | date: 'MM/dd/yyyy'}}</td>
+                    <td title="'Hours'" filter="{ hours: 'number'}" sortable="'hours'">
+                            {{task.hours}}</td>
+                    <td title="''">
+                            <md-button ng-click="TEC.deleteEntry(task.id)">Delete</md-button> </td>
+                </tr>
+        </table>

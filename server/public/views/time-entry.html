@@ -3,7 +3,6 @@
 <form>
 <input flex type="text" placeholder="Task name" ng-model="TEC.taskIn">
 <br>
-<!-- <md-select ng-model="ctrl.userState"> -->
     <md-input-container class="project">
     <label>Project</label>
     <md-select ng-model="TEC.projectIn">
@@ -24,13 +23,13 @@
 </div>
 
 <table ng-table="TEC.tableParams" class="table" show-filter="true">
-        <tr ng-repeat="task in TEC.taskList">
+        <tr ng-repeat="task in $data">
             <td title="'Task'" filter="{ task: 'text'}" sortable="'task'">
                 {{task.task}}</td>
             <td title="'Project'" filter="{ project: 'text'}" sortable="'project'">
                 {{task.project}}</td>
             <td title="'Date'" sortable="'date'">
-                {{task.date}}</td>
+                {{task.date | date: 'MM/dd/yyyy'}}</td>
             <td title="'Hours'" filter="{ hours: 'number'}" sortable="'hours'">
                     {{task.hours}}</td>
             <td title="''">

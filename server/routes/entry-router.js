@@ -8,9 +8,10 @@ router.post('/', (req, res)=>{
     let project = req.body.project;
     let date = req.body.date;
     let start_time = req.body.startTime;
-    let end_time = req.body.endTime;    
-    const queryText = `INSERT INTO tasks (task, project, date, start_time, end_time) VALUES ($1, $2, $3, $4, $5)`
-    pool.query(queryText, [task, project, date, start_time, end_time])
+    let end_time = req.body.endTime;   
+    let hours = req.body.hours; 
+    const queryText = `INSERT INTO tasks (task, project, date, start_time, end_time, hours) VALUES ($1, $2, $3, $4, $5, $6)`
+    pool.query(queryText, [task, project, date, start_time, end_time, hours])
     .then((result)=>{
         console.log('back from db with:', result);
         res.sendStatus(201)
