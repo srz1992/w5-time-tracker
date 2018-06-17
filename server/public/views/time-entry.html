@@ -6,8 +6,8 @@
     <md-input-container class="project">
     <label>Project</label>
     <md-select ng-model="TEC.projectIn">
-        <md-option ng-repeat="project in TEC.project" ng-value="project.name">
-        {{project.name}}
+        <md-option ng-repeat="project in TEC.projectList" ng-value="project.project">
+        {{project.project}}
         </md-option>
     </md-select>
 </md-input-container>

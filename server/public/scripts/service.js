@@ -4,6 +4,8 @@ timeApp.service('TimeService', function($http){
     self.newEntry;
     self.taskList;
 
+
+    // Entry functions
     self.getEntry = function(){
         return $http({
             method: 'GET',
@@ -42,6 +44,48 @@ timeApp.service('TimeService', function($http){
         }).catch(function(error){
             console.log('error deleting entry:', error);
             
+        })
+    }
+
+    // Project functions
+    self.projectList;
+    self.newProject;
+
+    self.getProject = function(){
+        console.log('in self.getProject');
+        return $http({
+            method: 'GET',
+            url: '/project'
+        }).then(function(response){
+            self.projectList = response.data;
+        }).catch(function(error){
+            console.log('error getting tasks:', error);
+        })
+    }
+    
+    self.postProject = function(){
+        console.log('in self.postProject');
+        return $http({
+            method: 'POST',
+            url: '/project',
+            data: self.newProject
+        }).then(function(response){
+            console.log('back from server with post response:', response);
+        }).catch(function(error){
+            console.log('back from server with post error:', error);
+        })
+    }
+
+    self.deleteProject = function(id){
+        console.log('in self.deleteProject');
+        return $http({
+            method: 'DELETE',
+            url: `/project/${id}`,
+
+        }).then(function(response){
+            console.log('back from server with delete response:', response);
+        }).catch(function(error){
+            console.log('back some server with delete error:', error);
         })
     }
 

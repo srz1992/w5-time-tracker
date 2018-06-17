@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+router.get('/', (req, res)=>{
+    console.log('getting task database rows from tasks');
+    const queryText = `Select * FROM tasks`;
+    pool.query(queryText)
+    .then((result) =>{
+        res.send(result.rows);
+    }).catch((error)=>{
+        console.log('error getting tasks:', error);
+        res.sendStatus(500);
+    })
+})
+
 router.post('/', (req, res)=>{
     console.log('in post to create new entry with:', req.body);
     let task = req.body.task;
@@ -21,17 +33,6 @@ router.post('/', (req, res)=>{
     })
 })
 
-router.get('/', (req, res)=>{
-    console.log('getting task database rows from tasks');
-    const queryText = `Select * FROM tasks`;
-    pool.query(queryText)
-    .then((result) =>{
-        res.send(result.rows);
-    }).catch((error)=>{
-        console.log('error getting tasks:', error);
-        res.sendStatus(500);
-    })
-})
 
 router.delete('/:id', (req, res)=>{
     console.log('in task entry delete request');
