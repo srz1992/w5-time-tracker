@@ -6,7 +6,6 @@ timeApp.controller('ManageProjectsController', ['TimeService','NgTableParams', f
     ];    
 
     vm.projectList;
-
     vm.tableParams = new NgTableParams({count: data.length}, { dataset: data, counts: []});
 
     vm.getProject = function(){
@@ -32,7 +31,15 @@ timeApp.controller('ManageProjectsController', ['TimeService','NgTableParams', f
 
     vm.deleteProject = function(id){
         TimeService.deleteProject(id).then(function(){vm.getProject()});;
-        // TimeService.deleteEntry(id).then(function(){vm.getEntry();});
+    }
+
+    // WIP
+    vm.updateProject = function(id){
+        vm.projectToUpdate;
+        TimeService.projectToUpdate = vm.projectToUpdate;
+        TimeService.updateProject(id).then(function(){
+            vm.getProject();
+        })
     }
 
     vm.getProject();

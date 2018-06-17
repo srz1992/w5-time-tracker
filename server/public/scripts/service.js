@@ -3,7 +3,7 @@ timeApp.service('TimeService', function($http){
     let self = this;
     self.newEntry;
     self.taskList;
-
+    self.objectToUpdate;
 
     // Entry functions
     self.getEntry = function(){
@@ -87,6 +87,20 @@ timeApp.service('TimeService', function($http){
         }).catch(function(error){
             console.log('back some server with delete error:', error);
         })
+    }
+
+    self.updateProject = function(id){
+        console.log('in self.updateProject');
+        return $http({
+            method: 'PUT',
+            url: `/project/${id}`,
+            data: self.objectToUpdate
+        }).then(function(response){
+            console.log('back from the server with update response:', response);
+        }).catch(function(error){
+            console.log('back from the server with update error:', error);
+        })
+        
     }
 
 })

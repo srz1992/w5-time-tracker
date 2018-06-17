@@ -20,6 +20,9 @@
     <script src="vendors/angular-material.min.js"></script>
     <script src="vendors/ng-table.min.js"></script>
    
+    <!-- ChartJS -->
+    <script src="vendors/Chart.min.js"></script>
+
     <!-- Client -->
     <script src="scripts/client.js"></script>
     
@@ -31,7 +34,7 @@
 
 
 </head>
-<body ng-app="timeApp" layout="column">
+<body ng-app="timeApp" onload="makeChart()" layout="column">
     <md-toolbar class="md-primary md-primary md-hue-2">
         <h1>Time Tracker</h1>
     </md-toolbar>
@@ -44,5 +47,7 @@
     <ng-view>
 
     </ng-view>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
 </body>
 </html>

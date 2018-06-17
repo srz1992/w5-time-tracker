@@ -25,6 +25,7 @@
     "angular-material": "^1.1.9",
     "angular-messages": "^1.7.2",
     "body-parser": "^1.18.3",
+    "chart.js": "^2.7.2",
     "express": "^4.16.3",
     "moment": "^2.22.2",
     "ng-table": "^3.0.1",
