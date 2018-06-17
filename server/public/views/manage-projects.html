@@ -11,7 +11,7 @@
                     <td title="'Task'" filter="{ task: 'text'}" sortable="'task'">
                         {{project.project}}</td>
                     <td title="'Total Hours'" sortable="'date'">
-                        {{project.sum}}</td>
+                        {{project.sum == null ? 0 : project.sum;  }}</td>
                     <td title="'Action'">
                             <md-button ng-click="MPC.deleteProject(project.id)">Delete</md-button> </td>
                 </tr>

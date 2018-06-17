@@ -4,7 +4,8 @@ const pool = require('../modules/pool')
 
 router.get('/', (req, res)=>{
     console.log('getting project rows from projects');
-    let queryText = `SELECT projects.id, projects.project, SUM(hours) from junction_table JOIN tasks on junction_table.task_id = tasks.id JOIN projects on junction_table.project_id = projects.id GROUP BY projects.id;`
+    let queryText = `SELECT projects.id, projects.project, SUM(hours) FROM projects LEFT JOIN tasks ON tasks.project_id = projects.id GROUP BY projects.id;
+    ;`
     pool.query(queryText)
     .then((result)=>{
         console.log('back from database with:', result);

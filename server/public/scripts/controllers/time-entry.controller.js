@@ -2,18 +2,6 @@ timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', functi
     let vm = this;
     vm.taskList;
 
-    vm.project = [
-    {
-        name: 'Koala Holla'
-    },
-    {
-        name: 'Record Store'
-    },
-    {
-        name: 'Calculator'
-    }
-    ]
-
     let data = [];    
     vm.projectList;
 
@@ -61,7 +49,7 @@ timeApp.controller('TimeEntryController', ['TimeService','NgTableParams', functi
 
         vm.newEntry = {
             task: vm.taskIn,
-            project: vm.projectIn,
+            project_id: vm.projectIn,
             date: vm.dateIn,
             startTime: vm.startIn,
             endTime: vm.endIn,
