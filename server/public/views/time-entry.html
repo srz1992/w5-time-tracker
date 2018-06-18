@@ -15,13 +15,13 @@
         <label>Enter date</label>
         <md-datepicker md-hide-icons="calendar" ng-model="TEC.dateIn"></md-datepicker>
 </md-input-container>
-<input type="time" placeholder="Start time" ng-model="TEC.startIn" step="60" value="12:00">
-<input type="time" id="time" placeholder="End time" ng-model="TEC.endIn">
+<span>Start Time: </span><input type="time" placeholder="Start time" ng-model="TEC.startIn" step="60" value="12:00">
+<span>End Time: </span><input type="time" id="time" placeholder="End time" ng-model="TEC.endIn">
 
 <md-button class="md-raised" ng-click="TEC.addEntry()">Submit</md-button>
 </form>
 </div>
-
+<br>
 <table ng-table="TEC.tableParams" class="table" show-filter="true">
         <tr ng-repeat="task in $data">
             <td title="'Task'" filter="{ task: 'text'}" sortable="'task'">
