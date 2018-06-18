@@ -28,3 +28,7 @@ md-datepicker{
 md-select{
     vertical-align: 40px !important;
 }
+
+nav{
+    margin-bottom: 20px;
+}

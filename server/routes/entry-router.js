@@ -4,8 +4,7 @@ const pool = require('../modules/pool')
 
 router.get('/', (req, res)=>{
     console.log('getting task database rows from tasks');
-    const queryText = `Select * FROM tasks JOIN projects ON tasks.project_id = projects.id;
-    `;
+    const queryText = `Select task, tasks.id, project_id, date, start_time, end_time, hours, project FROM tasks JOIN projects ON tasks.project_id = projects.id;`;
     pool.query(queryText)
     .then((result) =>{
         res.send(result.rows);
@@ -36,7 +35,7 @@ router.post('/', (req, res)=>{
 
 
 router.delete('/:id', (req, res)=>{
-    console.log('in task entry delete request');
+    console.log('in task entry delete request:', req.params);
     let id = req.params.id;
     let queryText = `DELETE from tasks WHERE id=$1`;
     pool.query(queryText, [id])
